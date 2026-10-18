@@ -1,0 +1,188 @@
+{
+ "reading_original": "MIXED (llama: INCONCLUSIVE, qwen3: INCONCLUSIVE)",
+ "reading_corrected": "SUPPORTED",
+ "per_model": {
+  "llama": {
+   "reading_original": "INCONCLUSIVE",
+   "reading_corrected": "SUPPORTED",
+   "reading_per_layer_variant": "SUPPORTED",
+   "D16_K2": {
+    "original": 0.11807436452318842,
+    "per_head": 0.38209749738184307,
+    "per_layer": 0.374576080086492
+   },
+   "E_V2": 0.07198827474494465,
+   "bar_2x_E_V2": 0.1439765494898893,
+   "ratio_D16_K2_over_E_V2": {
+    "original": 1.6401888354947713,
+    "per_head": 5.307774060923383,
+    "per_layer": 5.2032929169871025
+   },
+   "A_S": {
+    "A_S": 27.42307692307692,
+    "ci95": [
+     21.153846153846153,
+     33.73076923076923
+    ],
+    "delta_S_K": 30.0,
+    "delta_S_V": 2.57692307692308
+   },
+   "kept_D": {
+    "D16_K2": {
+     "original": 0.11807436452318842,
+     "per_head": 0.38209749738184307,
+     "per_layer": {
+      "mean": 0.374576080086492,
+      "examples": 130
+     }
+    },
+    "D16_K3": {
+     "original": 0.06260099734824437,
+     "per_head": 0.1997915483581332,
+     "per_layer": {
+      "mean": 0.19826280489978673,
+      "examples": 130
+     }
+    },
+    "D16_K4": {
+     "original": 0.031814704104684864,
+     "per_head": 0.10103831630773269,
+     "per_layer": {
+      "mean": 0.10070178817697507,
+      "examples": 130
+     }
+    },
+    "D64_K2": {
+     "original": 0.04679410106574113,
+     "per_head": 0.3406710330683451,
+     "per_layer": {
+      "mean": 0.29097493840378014,
+      "examples": 130
+     }
+    },
+    "D64_K3": {
+     "original": 0.02398174309100096,
+     "per_head": 0.17279163154845054,
+     "per_layer": {
+      "mean": 0.15035388972117747,
+      "examples": 130
+     }
+    },
+    "D64_K4": {
+     "original": 0.01174303675786807,
+     "per_head": 0.08446159112052276,
+     "per_layer": {
+      "mean": 0.07355491863979122,
+      "examples": 130
+     }
+    }
+   },
+   "full_context_D16_K2": 0.4843037176089218,
+   "layers": {
+    "16": {
+     "all_heads": 1288,
+     "any_head": 4160,
+     "total": 4160
+    },
+    "64": {
+     "all_heads": 671,
+     "any_head": 4160,
+     "total": 4160
+    }
+   },
+   "stage_a_recomputed_max_abs_diff": 4.57763671875e-05,
+   "examples": 130
+  },
+  "qwen3": {
+   "reading_original": "INCONCLUSIVE",
+   "reading_corrected": "SUPPORTED",
+   "reading_per_layer_variant": "SUPPORTED",
+   "D16_K2": {
+    "original": 0.12433476260202564,
+    "per_head": 0.38289753125391457,
+    "per_layer": 0.3529227166517614
+   },
+   "E_V2": 0.0859062796810833,
+   "bar_2x_E_V2": 0.1718125593621666,
+   "ratio_D16_K2_over_E_V2": {
+    "original": 1.4473303123311059,
+    "per_head": 4.457154153053484,
+    "per_layer": 4.108229549247673
+   },
+   "A_S": {
+    "A_S": 25.858974358974365,
+    "ci95": [
+     20.358653846153846,
+     31.58974358974359
+    ],
+    "delta_S_K": 26.461538461538467,
+    "delta_S_V": 0.6025641025641022
+   },
+   "kept_D": {
+    "D16_K2": {
+     "original": 0.12433476260202564,
+     "per_head": 0.38289753125391457,
+     "per_layer": {
+      "mean": 0.3529227166517614,
+      "examples": 130
+     }
+    },
+    "D16_K3": {
+     "original": 0.06565008029723779,
+     "per_head": 0.2038630852459842,
+     "per_layer": {
+      "mean": 0.1851454087245551,
+      "examples": 130
+     }
+    },
+    "D16_K4": {
+     "original": 0.03374035702301906,
+     "per_head": 0.10468948961068424,
+     "per_layer": {
+      "mean": 0.09501827242982258,
+      "examples": 130
+     }
+    },
+    "D64_K2": {
+     "original": 0.03407148033635229,
+     "per_head": 0.3301622743853646,
+     "per_layer": {
+      "mean": 0.3014385678524497,
+      "examples": 130
+     }
+    },
+    "D64_K3": {
+     "original": 0.017293052986646306,
+     "per_head": 0.17128176577070842,
+     "per_layer": {
+      "mean": 0.15050017391208134,
+      "examples": 130
+     }
+    },
+    "D64_K4": {
+     "original": 0.008509443050775774,
+     "per_head": 0.08483191710761469,
+     "per_layer": {
+      "mean": 0.07382869806610692,
+      "examples": 130
+     }
+    }
+   },
+   "full_context_D16_K2": 0.5005947289303836,
+   "layers": {
+    "16": {
+     "all_heads": 1609,
+     "any_head": 4680,
+     "total": 4680
+    },
+    "64": {
+     "all_heads": 535,
+     "any_head": 4680,
+     "total": 4680
+    }
+   },
+   "stage_a_recomputed_max_abs_diff": 4.468361536658083e-05,
+   "examples": 130
+  }
+ }
+}

@@ -1,0 +1,9 @@
+/data/*
+!/data/*.py
+!/data/manifests/
+!/data/ruler.patch
+/external/
+/figures/
+/raw/
+__pycache__/
+.DS_Store

@@ -1,0 +1,39 @@
+{
+ "call": "PASS",
+ "cells": [
+  {
+   "method": "FP16",
+   "bits_per_dim": 16.0,
+   "ppl": 6.070519685646148,
+   "paper": 6.070705291555834,
+   "relative_deviation": -3.057402736124482e-05,
+   "tolerance": 0.005,
+   "within": true,
+   "seconds": 11.290405988693237
+  },
+  {
+   "method": "KV-COBRA-KL",
+   "bits_per_dim": 0.5,
+   "ppl": 10.421822416196218,
+   "paper": 10.463008395990594,
+   "relative_deviation": -0.003936342038123402,
+   "tolerance": 0.03,
+   "within": true,
+   "seconds": 20.396655797958374
+  },
+  {
+   "method": "KV-COBRA-KL",
+   "bits_per_dim": 1.0,
+   "ppl": 8.149284293962864,
+   "paper": 8.122543536371854,
+   "relative_deviation": 0.003292165498561924,
+   "tolerance": 0.03,
+   "within": true,
+   "seconds": 21.484808683395386
+  }
+ ],
+ "model_path": "Qwen/Qwen2.5-7B-Instruct@a09a35458c702b33eeacc393d103063234e8bc28",
+ "eval_tokens": 32768,
+ "calibration_tokens": 5915,
+ "seconds": 87.6791319847107
+}

@@ -1,0 +1,62 @@
+{
+ "source": "https://raw.githubusercontent.com/nyu-mll/quality/f84977c40dbfef70c9cab48037b7becfc8e45f73/data/v1.0.1/QuALITY.v1.0.1.htmlstripped.train",
+ "source_sha256": "4011e9952d5395beb8ff7637b963481a400630c1bbe2f40dc0d83f5d59f926ed",
+ "seed": 20262102,
+ "train_articles": 150,
+ "dropped_as_in_dev": 0,
+ "splits": {
+  "A": {
+   "articles": 20,
+   "questions": 338,
+   "doc_ids": [
+    "quality-32836",
+    "quality-20066",
+    "quality-50869",
+    "quality-20061",
+    "quality-51202",
+    "quality-51656",
+    "quality-63640",
+    "quality-29196",
+    "quality-20012",
+    "quality-99903",
+    "quality-60713",
+    "quality-24521",
+    "quality-60747",
+    "quality-23791",
+    "quality-24517",
+    "quality-26569",
+    "quality-51310",
+    "quality-61228",
+    "quality-99924",
+    "quality-24192"
+   ],
+   "jsonl_sha256": "35a17936a28eb14b27980b2ce6327ad0a8cdebf5b64935070ba5f2b40b56e1a8"
+  },
+  "B": {
+   "articles": 10,
+   "questions": 165,
+   "doc_ids": [
+    "quality-31355",
+    "quality-51609",
+    "quality-58733",
+    "quality-52995",
+    "quality-51651",
+    "quality-23942",
+    "quality-51053",
+    "quality-61499",
+    "quality-52844",
+    "quality-61204"
+   ],
+   "jsonl_sha256": "8b48cb6128cf55f8adf052da8698b865377c5ba16c184e17c907825aa2b42862"
+  },
+  "smoke": {
+   "articles": 2,
+   "questions": 37,
+   "doc_ids": [
+    "quality-63109",
+    "quality-60995"
+   ],
+   "jsonl_sha256": "8f720bdf70e27dfdc787cbc23e1b432642589556f1a173211bf1f7f1f6b534c6"
+  }
+ }
+}

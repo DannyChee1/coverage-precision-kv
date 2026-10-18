@@ -1,0 +1,340 @@
+{
+ "tests": {
+  "ruler P @1.5625": {
+   "delta": 10.276923076923076,
+   "p": 0.0,
+   "sided": 1,
+   "ci95": [
+    7.861346153846151,
+    12.705192307692306
+   ],
+   "holm_threshold": 0.003125,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "ruler P @3.125": {
+   "delta": 3.882051282051293,
+   "p": 0.0,
+   "sided": 1,
+   "ci95": [
+    2.528076923076925,
+    5.276987179487198
+   ],
+   "holm_threshold": 0.0035714285714285718,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "ruler S @1.5625": {
+   "delta": 5.630769230769232,
+   "p": 0.0,
+   "sided": 1,
+   "ci95": [
+    3.7205128205128233,
+    7.589743589743605
+   ],
+   "holm_threshold": 0.004166666666666667,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "quality P @3.125": {
+   "delta": 3.0201342281879278,
+   "p": 0.0,
+   "sided": 1,
+   "ci95": [
+    1.8013193862975876,
+    4.254327529392623
+   ],
+   "holm_threshold": 0.005,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "quality S @1.5625": {
+   "delta": 2.1572387344199484,
+   "p": 0.0001,
+   "sided": 1,
+   "ci95": [
+    0.9689570886916145,
+    3.387424209114493
+   ],
+   "holm_threshold": 0.00625,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "quality P @1.5625": {
+   "delta": 2.588686481303924,
+   "p": 0.0002,
+   "sided": 1,
+   "ci95": [
+    1.2949485090738557,
+    3.932873606328211
+   ],
+   "holm_threshold": 0.008333333333333333,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "quality S @3.125": {
+   "delta": 1.7257909875359445,
+   "p": 0.0004,
+   "sided": 1,
+   "ci95": [
+    0.7204524481842114,
+    2.7104136947218223
+   ],
+   "holm_threshold": 0.0125,
+   "holm_pass": true,
+   "valid": true,
+   "passes": true
+  },
+  "ruler S @3.125": {
+   "delta": -0.16153846153846985,
+   "p": 0.6135,
+   "sided": 1,
+   "ci95": [
+    -1.2897435897435945,
+    0.9641025641025607
+   ],
+   "holm_threshold": 0.025,
+   "holm_pass": false,
+   "valid": true,
+   "passes": false
+  }
+ },
+ "calls": {
+  "trade": "HOLDS",
+  "three_bit_keys": "ADD"
+ },
+ "per_benchmark": {
+  "ruler": {
+   "accuracy": {
+    "full": 95.26666666666667,
+    "Z.stack4pc@1.5625": 62.01025641025641,
+    "Z.k4v2pc@1.5625": 72.28717948717949,
+    "Z.k3v2pc@1.5625": 77.91794871794872,
+    "Z.stack4pc@3.125": 89.55897435897435,
+    "Z.k4v2pc@3.125": 93.44102564102565,
+    "Z.k3v2pc@3.125": 93.27948717948718
+   },
+   "valid": {
+    "budget": true,
+    "complete": true,
+    "full_accuracy": true
+   },
+   "records": 650,
+   "questions": 650,
+   "budget": {
+    "pass": true,
+    "over": [],
+    "share_of_full_bytes": {
+     "Z.stack4pc@1.5625": 0.015494090694369612,
+     "Z.k4v2pc@1.5625": 0.015498952851150103,
+     "Z.k3v2pc@1.5625": 0.015500931136676494,
+     "Z.stack4pc@3.125": 0.031127120027323908,
+     "Z.k4v2pc@3.125": 0.031126518114211077,
+     "Z.k3v2pc@3.125": 0.031127407822624017
+    }
+   },
+   "kept": {
+    "Z.stack4pc@1.5625": 63410.276923076926,
+    "Z.k4v2pc@1.5625": 81533.41538461538,
+    "Z.k3v2pc@1.5625": 95127.75384615385,
+    "Z.stack4pc@3.125": 132526.46153846153,
+    "Z.k4v2pc@3.125": 170394.5846153846,
+    "Z.k3v2pc@3.125": 198801.35384615386
+   },
+   "gap_to_full": {
+    "Z.stack4pc@1.5625": -33.256410256410255,
+    "Z.k4v2pc@1.5625": -22.97948717948718,
+    "Z.k3v2pc@1.5625": -17.348717948717947,
+    "Z.stack4pc@3.125": -5.707692307692312,
+    "Z.k4v2pc@3.125": -1.8256410256410192,
+    "Z.k3v2pc@3.125": -1.987179487179489
+   },
+   "seconds": {
+    "per_record": 7.31744709785168
+   },
+   "per_task": {
+    "full": {
+     "cwe": 99.8,
+     "fwe": 98.66666666666666,
+     "niah_multikey_1": 100.0,
+     "niah_multikey_2": 100.0,
+     "niah_multikey_3": 100.0,
+     "niah_multiquery": 100.0,
+     "niah_multivalue": 100.0,
+     "niah_single_1": 100.0,
+     "niah_single_2": 100.0,
+     "niah_single_3": 100.0,
+     "qa_1": 84.0,
+     "qa_2": 56.0,
+     "vt": 100.0
+    },
+    "Z.stack4pc@1.5625": {
+     "cwe": 54.8,
+     "fwe": 75.33333333333331,
+     "niah_multikey_1": 78.0,
+     "niah_multikey_2": 60.0,
+     "niah_multikey_3": 0.0,
+     "niah_multiquery": 85.5,
+     "niah_multivalue": 68.5,
+     "niah_single_1": 100.0,
+     "niah_single_2": 86.0,
+     "niah_single_3": 24.0,
+     "qa_1": 38.0,
+     "qa_2": 36.0,
+     "vt": 100.0
+    },
+    "Z.k4v2pc@1.5625": {
+     "cwe": 72.4,
+     "fwe": 77.33333333333331,
+     "niah_multikey_1": 92.0,
+     "niah_multikey_2": 90.0,
+     "niah_multikey_3": 4.0,
+     "niah_multiquery": 91.0,
+     "niah_multivalue": 79.0,
+     "niah_single_1": 100.0,
+     "niah_single_2": 92.0,
+     "niah_single_3": 54.0,
+     "qa_1": 46.0,
+     "qa_2": 42.0,
+     "vt": 100.0
+    },
+    "Z.k3v2pc@1.5625": {
+     "cwe": 80.6,
+     "fwe": 81.33333333333331,
+     "niah_multikey_1": 94.0,
+     "niah_multikey_2": 92.0,
+     "niah_multikey_3": 8.0,
+     "niah_multiquery": 94.0,
+     "niah_multivalue": 85.0,
+     "niah_single_1": 100.0,
+     "niah_single_2": 92.0,
+     "niah_single_3": 82.0,
+     "qa_1": 58.0,
+     "qa_2": 46.0,
+     "vt": 100.0
+    },
+    "Z.stack4pc@3.125": {
+     "cwe": 92.6,
+     "fwe": 90.66666666666666,
+     "niah_multikey_1": 100.0,
+     "niah_multikey_2": 100.0,
+     "niah_multikey_3": 68.0,
+     "niah_multiquery": 99.0,
+     "niah_multivalue": 94.0,
+     "niah_single_1": 100.0,
+     "niah_single_2": 100.0,
+     "niah_single_3": 100.0,
+     "qa_1": 70.0,
+     "qa_2": 50.0,
+     "vt": 100.0
+    },
+    "Z.k4v2pc@3.125": {
+     "cwe": 95.4,
+     "fwe": 91.33333333333331,
+     "niah_multikey_1": 100.0,
+     "niah_multikey_2": 100.0,
+     "niah_multikey_3": 94.0,
+     "niah_multiquery": 99.5,
+     "niah_multivalue": 98.5,
+     "niah_single_1": 100.0,
+     "niah_single_2": 100.0,
+     "niah_single_3": 100.0,
+     "qa_1": 80.0,
+     "qa_2": 56.0,
+     "vt": 100.0
+    },
+    "Z.k3v2pc@3.125": {
+     "cwe": 95.8,
+     "fwe": 85.33333333333331,
+     "niah_multikey_1": 100.0,
+     "niah_multikey_2": 100.0,
+     "niah_multikey_3": 100.0,
+     "niah_multiquery": 100.0,
+     "niah_multivalue": 99.5,
+     "niah_single_1": 100.0,
+     "niah_single_2": 100.0,
+     "niah_single_3": 100.0,
+     "qa_1": 76.0,
+     "qa_2": 56.0,
+     "vt": 100.0
+    }
+   },
+   "valid_all": true
+  },
+  "quality": {
+   "accuracy": {
+    "full": 80.92042186001918,
+    "Z.stack4pc@1.5625": 62.12847555129434,
+    "Z.k4v2pc@1.5625": 64.71716203259827,
+    "Z.k3v2pc@1.5625": 66.87440076701822,
+    "Z.stack4pc@3.125": 71.0450623202301,
+    "Z.k4v2pc@3.125": 74.06519654841803,
+    "Z.k3v2pc@3.125": 75.79098753595397
+   },
+   "valid": {
+    "budget": true,
+    "complete": true,
+    "full_accuracy": true,
+    "full_parsed": true
+   },
+   "records": 115,
+   "questions": 2086,
+   "budget": {
+    "pass": true,
+    "over": [],
+    "share_of_full_bytes": {
+     "Z.stack4pc@1.5625": 0.015520958462855118,
+     "Z.k4v2pc@1.5625": 0.015525243460536728,
+     "Z.k3v2pc@1.5625": 0.015526670335179257,
+     "Z.stack4pc@3.125": 0.031151353629669067,
+     "Z.k4v2pc@3.125": 0.03115246928646905,
+     "Z.k3v2pc@3.125": 0.031154601862914865
+    }
+   },
+   "kept": {
+    "Z.stack4pc@1.5625": 95903.30434782608,
+    "Z.k4v2pc@1.5625": 123310.95652173914,
+    "Z.k3v2pc@1.5625": 143868.1739130435,
+    "Z.stack4pc@3.125": 197514.4347826087,
+    "Z.k4v2pc@3.125": 253950.60869565216,
+    "Z.k3v2pc@3.125": 296283.47826086957
+   },
+   "gap_to_full": {
+    "Z.stack4pc@1.5625": -18.79194630872483,
+    "Z.k4v2pc@1.5625": -16.203259827420908,
+    "Z.k3v2pc@1.5625": -14.04602109300096,
+    "Z.stack4pc@3.125": -9.875359539789073,
+    "Z.k4v2pc@3.125": -6.855225311601146,
+    "Z.k3v2pc@3.125": -5.129434324065201
+   },
+   "seconds": {
+    "per_record": 16.279778660898625
+   },
+   "parsed": {
+    "full": 0.99856184084372,
+    "Z.stack4pc@1.5625": 0.986097794822627,
+    "Z.k4v2pc@1.5625": 0.9884947267497604,
+    "Z.k3v2pc@1.5625": 0.9899328859060402,
+    "Z.stack4pc@3.125": 0.9928092042186002,
+    "Z.k4v2pc@3.125": 0.9956855225311602,
+    "Z.k3v2pc@3.125": 0.9976030680728667
+   },
+   "valid_all": true
+  }
+ },
+ "rule": {
+  "alpha": 0.025,
+  "margin": 1.0,
+  "tests": 8,
+  "bootstrap": {
+   "B": 10000,
+   "seed": 0
+  }
+ }
+}

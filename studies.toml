@@ -1,0 +1,999 @@
+# Analyses (run.py verify/analyze) and GPU driver calls (run.py drive). @K is records/, @RAW raw/, @R results/, @OUT the
+
+# output folder; braces expand like a shell in analyses and pairwise in drivers. Tier 1 needs this repository, tier 2
+
+# also the rebuilt data, tier 3 also the drivers' raw records.
+
+
+
+[[analysis]]
+key = "controls"
+paper = "Table 2 (8-page) / Table 1 (full), Figure A1"
+tier = 1
+args = "controls_analyze.py --model llama @K/controls_llama_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --model qwen3 @K/controls_qwen3_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --ruler-expected 338 --out @OUT/controls/results.json"
+produces = ["controls/results.json"]
+
+[[analysis]]
+key = "controls"
+paper = "Table 2 (8-page) / Table 1 (full): intervals"
+tier = 1
+args = "table1_intervals.py --model llama @K/controls_llama_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --model qwen3 @K/controls_qwen3_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --out @OUT/controls/table1_intervals.json"
+produces = ["controls/table1_intervals.json"]
+
+[[analysis]]
+key = "qwen14b"
+paper = "Table 2 (8-page) / Table 1 (full): Qwen3-14B rows"
+tier = 1
+args = "qwen14b_analyze.py --records @K/q14_ruler_{0,1,2,3}.jsonl @K/q14_quality_{0,1,2}.jsonl --out @OUT/qwen14b/results.json"
+produces = ["qwen14b/results.json"]
+
+[[analysis]]
+key = "review4k"
+paper = "TurboQuant fidelity gate"
+tier = 1
+args = "review4k_analyze.py gate @K/review_gate_llama.jsonl --out @OUT/review/gate_4k.json"
+produces = ["review/gate_4k.json"]
+
+[[analysis]]
+key = "review4k"
+paper = "Table 6, Table A2, Figure 1 (8-page) / Tables 3, 6 (full)"
+tier = 1
+args = "review4k_analyze.py main --model llama @K/review_4k_llama_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --model qwen3 @K/review_4k_qwen3_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --gate @R/review/gate_4k.json --control llama @K/controls_llama_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --control qwen3 @K/controls_qwen3_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --out @OUT/review/result_4k.json"
+produces = ["review/result_4k.json"]
+
+[[analysis]]
+key = "review16k"
+paper = "Table 5 (8-page) / Table 2 (full): 16K rows"
+tier = 1
+args = "review16k_analyze.py --model llama @K/review_16k_llama_{0,1}.jsonl --model qwen3 @K/review_16k_qwen3_{0,1}.jsonl --four-k @R/controls/results.json --out @OUT/review/result_16k.json"
+produces = ["review/result_16k.json"]
+
+[[analysis]]
+key = "longbench"
+paper = "Table 5 (8-page) / Table 2 (full): summarization rows"
+tier = 1
+args = "review_longbench_analyze.py --model llama @K/review_longbench_llama_{gov_report,qmsum}.jsonl --model qwen3 @K/review_longbench_qwen3_{gov_report,qmsum}.jsonl --out @OUT/review/result_longbench.json"
+produces = ["review/result_longbench.json"]
+
+[[analysis]]
+key = "reprefill"
+paper = "Table A3 (8-page) / Table 7 (full)"
+tier = 1
+args = "reprefill_table.py --records llama @K/repair2_llama_{ruler_0,ruler_1,quality_0,quality_1}.jsonl --records qwen3 @K/repair2_qwen3_{ruler_0,ruler_1,quality_0,quality_1}.jsonl --accuracy @R/controls/results.json --bench llama @K/review_bench_llama.json --bench qwen3 @K/review_bench_qwen3.json --out @OUT/review/result_reprefill.json"
+produces = ["review/result_reprefill.json"]
+
+[[analysis]]
+key = "kvcobra"
+paper = "Table 6 (8-page) / Table 3 (full): KV-COBRA rows"
+tier = 1
+args = "kvcobra_analyze.py --model llama @K/kvcobra_llama_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --model qwen3 @K/kvcobra_qwen3_{ruler_0,ruler_1,quality_0,quality_1,quality_2}.jsonl --gate @R/kvcobra/gate.json --out @OUT/kvcobra/result.json"
+produces = ["kvcobra/result.json"]
+
+[[analysis]]
+key = "am-stack"
+paper = "Figure A1 (8-page) / Figure 1 (full)"
+tier = 1
+args = "am_stack_analyze.py --model llama @K/am_llama_0.jsonl --model qwen3 @K/am_qwen3_0.jsonl --cpu-check @R/am-stack/cpu_check.json --expected 169 --out @OUT/am-stack/results.json"
+produces = ["am-stack/results.json"]
+
+[[analysis]]
+key = "lowbit"
+paper = "predictions written before the low-bit run"
+tier = 1
+args = "lowbit_predict.py --out @OUT/allocation/lowbit_predictions.json"
+produces = ["allocation/lowbit_predictions.json"]
+
+[[analysis]]
+key = "lowbit"
+paper = "Figure A2 (8-page) / Figure 2 (full)"
+tier = 1
+args = "lowbit_analyze.py --model llama @K/lowbit_llama_{0,1,2,3}.jsonl --model qwen3 @K/lowbit_qwen3_{0,1,2,3}.jsonl --predictions @R/allocation/lowbit_predictions.json --out @OUT/lowbit/results.json"
+produces = ["lowbit/results.json"]
+
+[[analysis]]
+key = "keys-ablation"
+paper = "Figure A2 (8-page) / Figure 2 (full)"
+tier = 1
+args = "keys_ablation_analyze.py --model llama @K/keys_llama_{0,1,2,3}.jsonl --model qwen3 @K/keys_qwen3_{0,1,2,3}.jsonl --out @OUT/keys-ablation/results.json"
+produces = ["keys-ablation/results.json"]
+
+[[analysis]]
+key = "sweep"
+paper = "Figure A3 (8-page) / Figure 3 (full)"
+tier = 1
+args = "sweep_analyze.py --model llama @K/sweep_llama_{0,1,2,3}.jsonl --model qwen3 @K/sweep_qwen3_{0,1,2,3}.jsonl --out @OUT/sweep/results.json"
+produces = ["sweep/results.json"]
+
+[[analysis]]
+key = "tca"
+paper = "tca2's fitted weights"
+tier = 1
+args = "tca_fit.py --model llama @K/tca_calib_llama_{ruler_0,ruler_1,quality_0,quality_1}.jsonl --model qwen3 @K/tca_calib_qwen3_{ruler_0,ruler_1,quality_0,quality_1}.jsonl --manifest data/manifests/tca/manifest.json --out @OUT/tca/fit.json"
+produces = ["tca/fit.json"]
+
+[[analysis]]
+key = "tca"
+paper = "the primary arm, chosen on held-out calibration split B before the test (Table A1's setup)"
+tier = 1
+args = "tca_check.py --check @K/tca_check_{llama,qwen3}_{ruler,quality}.jsonl --calib @K/tca_calib_{llama,qwen3}_{ruler_0,ruler_1,quality_0,quality_1}.jsonl --manifest data/manifests/tca/manifest.json --out @OUT/tca/primary.json"
+produces = ["tca/primary.json"]
+
+[[analysis]]
+key = "tca"
+paper = "Table A1 (8-page) / Table 4 (full)"
+tier = 1
+args = "tca_analyze.py --model llama @K/tca_test_llama_{ruler_0,ruler_1,ruler_2,ruler_3,quality_0,quality_1,quality_2}.jsonl --model qwen3 @K/tca_test_qwen3_{ruler_0,ruler_1,ruler_2,ruler_3,quality_0,quality_1,quality_2}.jsonl --fit @R/tca/fit.json --primary @R/tca/primary.json --out @OUT/tca/test_result.json"
+produces = ["tca/test_result.json"]
+
+[[analysis]]
+key = "tca-ablate"
+paper = "Table A5 (8-page) / Table 5 (full)"
+tier = 1
+args = "tca_ablate_analyze.py --model llama @K/tca_ablate_llama_ruler_{0,1}.jsonl --model qwen3 @K/tca_ablate_qwen3_ruler_{0,1}.jsonl --out @OUT/tca/ablate_result.json"
+produces = ["tca/ablate_result.json"]
+
+[[analysis]]
+key = "rdkv"
+paper = "RDKV fidelity gate (Appendix A.6)"
+tier = 1
+args = "rdkv_fidelity_analyze.py --records @K/rdkv_fidelity.jsonl --calib @K/rdkv_calib_llama.json --out @OUT/rdkv/fidelity_result.json"
+produces = ["rdkv/fidelity_result.json"]
+
+[[analysis]]
+key = "rdkv"
+paper = "RDKV-inspired allocator (Section 3.6, Appendix A.6)"
+tier = 1
+args = "rdkv_hidden_analyze.py --model llama @K/rdkv_llama_{ruler_0,ruler_1,ruler_2,ruler_3,quality_0,quality_1,quality_2}.jsonl --model qwen3 @K/rdkv_qwen3_{ruler_0,ruler_1,ruler_2,ruler_3,quality_0,quality_1,quality_2}.jsonl --gate @R/rdkv/fidelity_result.json --calib llama @K/rdkv_hidden_calib_llama.json --calib qwen3 @K/rdkv_hidden_calib_qwen3.json --out @OUT/rdkv/hidden_result.json"
+produces = ["rdkv/hidden_result.json"]
+
+[[analysis]]
+key = "mechanism"
+paper = "key error and attention picks (Section 3.4)"
+tier = 1
+args = "mechanism_analyze.py --model llama @K/mechanism_llama.jsonl --confirm @K/confirm_llama_{0,1,2,3}.jsonl --model qwen3 @K/mechanism_qwen3.jsonl --confirm @K/confirm_qwen3_{0,1,2,3}.jsonl --out @OUT/mechanism/results.json"
+produces = ["mechanism/results.json"]
+
+[[analysis]]
+key = "mechanism"
+paper = "the recompute check (Appendix A.7)"
+tier = 1
+args = "mechanism_recompute_analyze.py --recompute @R/crowding/stage_a_recompute.jsonl --model llama @K/mechanism_llama.jsonl --confirm @K/confirm_llama_{0,1,2,3}.jsonl --model qwen3 @K/mechanism_qwen3.jsonl --confirm @K/confirm_qwen3_{0,1,2,3}.jsonl --out @OUT/mechanism/recompute.json"
+produces = ["mechanism/recompute.json"]
+
+[[analysis]]
+key = "audit"
+paper = "leaderboard reproduction (Section 2, Appendix A.9)"
+tier = 1
+args = "leaderboard_analyze.py @K/leaderboard_llama_{0,1}.jsonl --out @OUT/leaderboard/results.json"
+produces = ["leaderboard/results.json"]
+
+[[analysis]]
+key = "answer-blind"
+paper = "Table 1 (8-page) / Table 14 (full)"
+tier = 1
+args = "answer_blind_e1_analyze.py --model llama @K/abl_e1_llama_run.jsonl --model qwen3 @K/abl_e1_qwen3_run.jsonl --out @OUT/answerblind/e1_result.json"
+produces = ["answerblind/e1_result.json"]
+
+[[analysis]]
+key = "answer-blind"
+paper = "Table 4 (8-page) / Table 15 (full)"
+tier = 1
+args = "answer_blind_e2_analyze.py --model llama @K/abl_e2_llama_{ruler,docs}.jsonl --model qwen3 @K/abl_e2_qwen3_{ruler,docs}.jsonl --out @OUT/answerblind/e2_result.json"
+produces = ["answerblind/e2_result.json"]
+
+[[analysis]]
+key = "visible-lift"
+paper = "Table 3 (8-page) / Table 19 (full)"
+tier = 1
+args = "visible_lift_analyze.py --model llama @K/vl_llama_run.jsonl --model qwen3 @K/vl_qwen3_run.jsonl --out @OUT/visible-lift/result.json"
+produces = ["visible-lift/result.json"]
+
+[[analysis]]
+key = "objection1"
+paper = "the NIAH boundary (Section 3.2)"
+tier = 1
+args = "objection1_check.py --out @OUT/objection1/result.json"
+produces = ["objection1/result.json"]
+
+[[analysis]]
+key = "frontier"
+paper = "Figure 2 (8-page): the blend sweep"
+tier = 1
+args = "frontier_analyze.py --records llama @K/fr_llama_run.jsonl --records qwen3 @K/fr_qwen3_run.jsonl --out @OUT/frontier/result.json"
+produces = ["frontier/result.json"]
+
+[[analysis]]
+key = "frontier"
+paper = "Figure 2 (8-page): evidence lift"
+tier = 1
+args = "frontier_evidence.py --out @OUT/frontier/evidence_lift.json"
+produces = ["frontier/evidence_lift.json"]
+
+[[analysis]]
+key = "frontier-confirm"
+paper = "Table 7 (8-page) / Table 17 (full)"
+tier = 1
+args = "frontier_confirm_analyze.py --conf llama @K/fc_llama_conf.jsonl --conf qwen3 @K/fc_qwen3_conf.jsonl --quality llama @K/fc_llama_quality.jsonl --quality qwen3 @K/fc_qwen3_quality.jsonl --longbench llama @K/fc_llama_{gov_report,qmsum}.jsonl --longbench qwen3 @K/fc_qwen3_{gov_report,qmsum}.jsonl --out @OUT/frontier-confirm/result.json"
+produces = ["frontier-confirm/result.json"]
+
+[[analysis]]
+key = "answer-predictor"
+paper = "a question-free answer reserve (Appendix B)"
+tier = 2
+args = "answer_predictor_phase0.py --out @OUT/anomalies/answer_predictor_phase0.json"
+produces = ["anomalies/answer_predictor_phase0.json"]
+
+[[analysis]]
+key = "figures"
+paper = "Figures 1, 2, A1-A3 (8-page) / Figures 1-3 (full)"
+tier = 1
+args = "make_query_agnostic_figures.py --out @OUT/figures"
+produces = ["figures"]
+
+[[analysis]]
+key = "audit"
+paper = "full-cache agreement across runs, Llama (Appendix A.9)"
+tier = 1
+args = "full_agreement.py --a @K/controls_llama_quality_{0,1,2}.jsonl --b @K/rdkv_llama_quality_{0,1,2}.jsonl --out @OUT/full-agreement/llama.json"
+produces = ["full-agreement/llama.json"]
+
+[[analysis]]
+key = "audit"
+paper = "full-cache agreement across runs, Qwen3 (Appendix A.9)"
+tier = 1
+args = "full_agreement.py --a @K/controls_qwen3_quality_{0,1,2}.jsonl --b @K/rdkv_qwen3_quality_{0,1,2}.jsonl --out @OUT/full-agreement/qwen3.json"
+produces = ["full-agreement/qwen3.json"]
+
+[[driver]]
+key = "mechanism"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "confirm.py"
+args = "--rows data/ruler-fresh-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "confirm_llama_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh-4096/test.jsonl --per-task 1 --offset 0 --max-examples 1"
+note = "Decoded before exact masking: today's driver masks exactly, so a rerun differs from these records (README, Older runs)."
+
+[[driver]]
+key = "mechanism"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "confirm.py"
+args = "--rows data/ruler-fresh-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "confirm_qwen3_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh-4096/test.jsonl --per-task 1 --offset 0 --max-examples 1"
+note = "Decoded before exact masking: today's driver masks exactly, so a rerun differs from these records (README, Older runs)."
+
+[[driver]]
+key = "mechanism"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "mechanism.py"
+args = "--rows data/ruler-fresh-4096/test.jsonl --per-task 10 --confirm raw/confirm_llama_0.jsonl raw/confirm_llama_1.jsonl raw/confirm_llama_2.jsonl raw/confirm_llama_3.jsonl"
+out = "mechanism_llama.jsonl"
+one_example = ""
+note = "--confirm reads the confirmation run's raw records (it needs answers['full']), so run that driver first. No single-example option: the cheapest call is --per-task 1 (13 examples, one per task). Decoded before exact masking and before a later fix to Stage A's D: today's driver gives the corrected D (README, Older runs)."
+
+[[driver]]
+key = "mechanism"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "mechanism.py"
+args = "--rows data/ruler-fresh-4096/test.jsonl --per-task 10 --confirm raw/confirm_qwen3_0.jsonl raw/confirm_qwen3_1.jsonl raw/confirm_qwen3_2.jsonl raw/confirm_qwen3_3.jsonl"
+out = "mechanism_qwen3.jsonl"
+one_example = ""
+note = "--confirm reads the confirmation run's raw records (it needs answers['full']), so run that driver first. No single-example option: the cheapest call is --per-task 1 (13 examples). Decoded before exact masking and before a later fix to Stage A's D: today's driver gives the corrected D (README, Older runs)."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# RULER studies on Stage 2's 4-shard layout (sweep, improve, keys, lowbit) and the AM stack
+
+[[driver]]
+key = "sweep"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "sweep.py"
+args = "--rows data/ruler-fresh2-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "sweep_llama_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh2-4096/test.jsonl --per-task 1 --offset 0 --max-examples 1"
+note = "Predates a mask-memory fix that was checked bit-identical on CPU."
+
+[[driver]]
+key = "sweep"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "sweep.py"
+args = "--rows data/ruler-fresh2-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "sweep_qwen3_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh2-4096/test.jsonl --per-task 1 --offset 0 --max-examples 1"
+note = "Predates a mask-memory fix that was checked bit-identical on CPU."
+
+[[driver]]
+key = "keys-ablation"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "keys_ablation.py"
+args = "--rows data/ruler-fresh4-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "keys_llama_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh4-4096/test.jsonl --per-task 1 --offset 0"
+note = "one_example is the cheapest call (13 examples). Predates a mask-memory fix that was checked bit-identical on CPU."
+
+[[driver]]
+key = "keys-ablation"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "keys_ablation.py"
+args = "--rows data/ruler-fresh4-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "keys_qwen3_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh4-4096/test.jsonl --per-task 1 --offset 0"
+note = "one_example is the cheapest call (13 examples). Predates a mask-memory fix that was checked bit-identical on CPU."
+
+[[driver]]
+key = "lowbit"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "lowbit.py"
+args = "--rows data/ruler-fresh7-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "lowbit_llama_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh7-4096/test.jsonl --per-task 1 --offset 0"
+note = "one_example is the cheapest call (13 examples)."
+
+[[driver]]
+key = "lowbit"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "lowbit.py"
+args = "--rows data/ruler-fresh7-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "lowbit_qwen3_{0,1,2,3}.jsonl"
+one_example = "--rows data/ruler-fresh7-4096/test.jsonl --per-task 1 --offset 0"
+note = "one_example is the cheapest call (13 examples)."
+
+[[driver]]
+key = "am-stack"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "am_stack.py"
+args = "--rows data/ruler-fresh5-4096/test.jsonl --per-task 13 --offset 0"
+out = "am_llama_0.jsonl"
+one_example = "--rows data/ruler-fresh5-4096/test.jsonl --per-task 1 --offset 0"
+note = "Only shard 0 ran (cost-forced deviation, 169 examples). AM's code is third_party/attention_matching. one_example is the cheapest call (13 examples)."
+
+[[driver]]
+key = "am-stack"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "am_stack.py"
+args = "--rows data/ruler-fresh5-4096/test.jsonl --per-task 13 --offset 0"
+out = "am_qwen3_0.jsonl"
+one_example = "--rows data/ruler-fresh5-4096/test.jsonl --per-task 1 --offset 0"
+note = "Only shard 0 ran (cost-forced deviation, 169 examples). one_example is the cheapest call (13 examples)."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# One cache per document: Stage C, re-baseline, adaptive
+
+[[driver]]
+key = "audit"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "leaderboard.py"
+args = "--per-task 25 --offset {0,25}"
+out = "leaderboard_llama_{0,1}.jsonl"
+one_example = "--per-task 1 --offset 0 --max-examples 1"
+note = "Rows come from simonjegou/ruler (4096) @24adcea, which the driver downloads."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Control run (Table 1) and Qwen3-14B
+
+[[driver]]
+key = "controls"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "controls.py"
+args = "--rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset {0,13}"
+out = "controls_llama_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "Lean variant: only Stage 2 shards 0 and 1 ran (338 examples). Also read by review4k."
+
+[[driver]]
+key = "controls"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "controls.py"
+args = "--docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "controls_llama_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/stagec/quality.jsonl --max-items 1"
+note = "Also read by review4k and audit (full_agreement.py)."
+
+[[driver]]
+key = "controls"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "controls.py"
+args = "--rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset {0,13}"
+out = "controls_qwen3_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "Lean variant: only Stage 2 shards 0 and 1 ran (338 examples). Also read by review4k."
+
+[[driver]]
+key = "controls"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "controls.py"
+args = "--docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "controls_qwen3_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/stagec/quality.jsonl --max-items 1"
+note = "Also read by review4k and audit (full_agreement.py)."
+
+[[driver]]
+key = "qwen14b"
+model = "Qwen/Qwen3-14B@40c069824f4251a91eefaf281ebe4c544efd3e18"
+script = "qwen14b.py"
+args = "--rows data/ruler-fresh9-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "q14_ruler_{0,1,2,3}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/ruler-fresh9-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "Needs 32-64 GiB of host RAM (29.5 GB of weights)."
+
+[[driver]]
+key = "qwen14b"
+model = "Qwen/Qwen3-14B@40c069824f4251a91eefaf281ebe4c544efd3e18"
+script = "qwen14b.py"
+args = "--docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "q14_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/stagec/quality.jsonl --max-items 1"
+note = "Needs 32-64 GiB of host RAM."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Landmark repair: the per-head design (smoke only) and the shared re-prefill budget
+
+[[driver]]
+key = "rdkv"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "rdkv_fidelity.py"
+args = "--data data/longbench/data --config data/longbench --calib records/rdkv_calib_llama.json --limit-per-task 5"
+out = "rdkv_calib_llama.json"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--data data/longbench/data --config data/longbench --calib records/rdkv_calib_llama.json --tasks qasper --limit-per-task 1"
+note = "The timing smoke. The driver computes the distortion tables (32 prefills) and writes them to --calib when that path does not exist; this call's own --out was rdkv_fidelity_smoke.jsonl (not released). The calibration is not per-example; one_example runs it too when --calib is absent."
+
+[[driver]]
+key = "rdkv"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "rdkv_fidelity.py"
+args = "--data data/longbench/data --config data/longbench --calib records/rdkv_calib_llama.json"
+out = "rdkv_fidelity.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--data data/longbench/data --config data/longbench --calib records/rdkv_calib_llama.json --tasks qasper --limit-per-task 1"
+note = "The full gate (1,050 examples over the default tasks qasper, multifieldqa_en, trec, lcc), reusing the smoke's calibration. data/longbench: README, Data."
+
+[[driver]]
+key = "rdkv"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "rdkv_hidden.py"
+args = "--calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/smoke.jsonl --per-task 2"
+out = "rdkv_hidden_calib_llama.json"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/smoke.jsonl --per-task 1 --max-items 1"
+note = "The smoke's RULER call (the first of its two calls). The driver calibrates on the 32 fresh-11 calib contexts and writes --calib when that path does not exist; the call's own --out was rdkv_llama_ruler_smoke.jsonl (not released)."
+
+[[driver]]
+key = "rdkv"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "rdkv_hidden.py"
+args = "--calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/smoke.jsonl --per-task 2"
+out = "rdkv_hidden_calib_qwen3.json"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/smoke.jsonl --per-task 1 --max-items 1"
+note = "The smoke's RULER call ; calibration written to --calib when absent; the call's own --out was rdkv_qwen3_ruler_smoke.jsonl (not released)."
+
+[[driver]]
+key = "rdkv"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "rdkv_hidden.py"
+args = "--calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "rdkv_llama_ruler_{0,1,2,3}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = ""
+
+[[driver]]
+key = "rdkv"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "rdkv_hidden.py"
+args = "--calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "rdkv_llama_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --max-items 1"
+note = "Also read by audit (full_agreement.py)."
+
+[[driver]]
+key = "rdkv"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "rdkv_hidden.py"
+args = "--calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "rdkv_qwen3_ruler_{0,1,2,3}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh11-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "Shard 3 ran in more than one call (the driver resumes from its --out; the last call added 11 examples)."
+
+[[driver]]
+key = "rdkv"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "rdkv_hidden.py"
+args = "--calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "rdkv_qwen3_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --max-items 1"
+note = "Also read by audit (full_agreement.py)."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Task-calibrated allocator. Common inputs: results/tca/plan_*.json and records/tca_calib_<model>.json (TCA's own
+# tables; the driver computes and writes them from --tca-calib-rows when the path does not exist).
+
+[[driver]]
+key = "tca"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode calib --plan results/tca/plan_calib.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task {8,7} --offset {0,8}"
+out = "tca_calib_llama_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode calib --plan results/tca/plan_calib.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "Calibration shards over the 15 fresh-12 calib examples per task."
+
+[[driver]]
+key = "tca"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode calib --plan results/tca/plan_calib.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_AB.jsonl --part {0,1} --parts 2"
+out = "tca_calib_llama_quality_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode calib --plan results/tca/plan_calib.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_AB.jsonl --max-items 1"
+note = "data/tca/quality_train_AB.jsonl = cat quality_train_A.jsonl quality_train_B.jsonl (30 articles; README, Data)."
+
+[[driver]]
+key = "tca"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode calib --plan results/tca/plan_calib.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task {8,7} --offset {0,8}"
+out = "tca_calib_qwen3_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode calib --plan results/tca/plan_calib.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task 1 --offset 0 --max-items 1"
+note = ""
+
+[[driver]]
+key = "tca"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode calib --plan results/tca/plan_calib.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_AB.jsonl --part {0,1} --parts 2"
+out = "tca_calib_qwen3_quality_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode calib --plan results/tca/plan_calib.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_AB.jsonl --max-items 1"
+note = "data/tca/quality_train_AB.jsonl = cat quality_train_A.jsonl quality_train_B.jsonl (README, Data)."
+
+[[driver]]
+key = "tca"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode test --plan results/tca/plan_test.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "tca_test_llama_ruler_{0,1,2,3}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode test --plan results/tca/plan_test.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = ""
+
+[[driver]]
+key = "tca"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode test --plan results/tca/plan_test.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "tca_test_llama_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode test --plan results/tca/plan_test.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "tca"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode test --plan results/tca/plan_test.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/test.jsonl --per-task {13,13,12,12} --offset {0,13,26,38}"
+out = "tca_test_qwen3_ruler_{0,1,2,3}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode test --plan results/tca/plan_test.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "Shards 1 and 3 ran in more than one call (resumed from --out; the last calls added 8 and 51 examples)."
+
+[[driver]]
+key = "tca"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode test --plan results/tca/plan_test.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "tca_test_qwen3_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode test --plan results/tca/plan_test.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "tca-ablate"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode ablate --plan results/tca/plan_ablate.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh13-4096/test.jsonl --per-task {13,12} --offset {0,13}"
+out = "tca_ablate_llama_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode ablate --plan results/tca/plan_ablate.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh13-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "RULER fresh-13, 1.5625% only."
+
+[[driver]]
+key = "tca-ablate"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode ablate --plan results/tca/plan_ablate.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh13-4096/test.jsonl --per-task {13,12} --offset {0,13}"
+out = "tca_ablate_qwen3_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode ablate --plan results/tca/plan_ablate.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh13-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "RULER fresh-13, 1.5625% only."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Review runs: TurboQuant gate, 4K, 16K, LongBench, re-prefill bench. The TCA row's arguments:
+# plan results/tca/plan_test.json, setting tca2. --tq-keys is review/gate_4k.json's
+# key_variant (mse).
+
+[[driver]]
+key = "review4k"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "review4k.py"
+args = "--gate --rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset 26"
+out = "review_gate_llama.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--gate --rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 26 --max-items 1"
+note = "The TurboQuant fidelity gate: 169 fresh-6 examples at offset 26 (outside Table 1's), no eviction."
+
+[[driver]]
+key = "review4k"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "review4k.py"
+args = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset {0,13}"
+out = "review_4k_llama_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = ""
+
+[[driver]]
+key = "review4k"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "review4k.py"
+args = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "review_4k_llama_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "review4k"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "review4k.py"
+args = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset {0,13}"
+out = "review_4k_qwen3_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = ""
+
+[[driver]]
+key = "review4k"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "review4k.py"
+args = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "review_4k_qwen3_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tq-keys mse --tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "review16k"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "longctx.py"
+args = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --rows data/ruler-16k-llama/test.jsonl --per-task 13 --offset {0,13}"
+out = "review_16k_llama_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --rows data/ruler-16k-llama/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "No --max-batch: the run's memory plan left batch A whole."
+
+[[driver]]
+key = "review16k"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "longctx.py"
+args = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --rows data/ruler-16k-qwen3/test.jsonl --per-task 13 --offset {0,13}"
+out = "review_16k_qwen3_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --rows data/ruler-16k-qwen3/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "No --max-batch: the run's memory plan left batch A whole."
+
+[[driver]]
+key = "longbench"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "review_longbench.py"
+args = "--plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task {gov_report,qmsum}"
+out = "review_longbench_llama_{gov_report,qmsum}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task gov_report --max-items 1"
+note = "No TCA row (tca_decision runs 4k and 16k only). The driver checks each task file against the plan's sha256; data/longbench: README, Data."
+
+[[driver]]
+key = "longbench"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "review_longbench.py"
+args = "--plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task {gov_report,qmsum}"
+out = "review_longbench_qwen3_{gov_report,qmsum}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task gov_report --max-items 1"
+note = ""
+
+[[driver]]
+key = "reprefill"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "reprefill_bench.py"
+args = "--rows data/ruler-fresh6-4096/test.jsonl"
+out = "review_bench_llama.json"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/ruler-fresh6-4096/test.jsonl --lengths 4096 --repeats 1"
+note = "A timing benchmark, not per-example (contexts packed to 4K-32K from the rows; 5 repeats). Timings depend on the GPU (L40S)."
+
+[[driver]]
+key = "reprefill"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "reprefill_bench.py"
+args = "--rows data/ruler-fresh6-4096/test.jsonl"
+out = "review_bench_qwen3.json"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/ruler-fresh6-4096/test.jsonl --lengths 4096 --repeats 1"
+note = "A timing benchmark, not per-example."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# KV-COBRA rows on the 4K harness (with the TCA row) and its 1/2/4-bit check (smoke examples, no TCA row)
+
+[[driver]]
+key = "kvcobra"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "kvcobra_run.py"
+args = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset {0,13}"
+out = "kvcobra_llama_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = "KV-COBRA's code is third_party/kvcobra. The records carry Z.tca rows, so the TCA arguments were in."
+
+[[driver]]
+key = "kvcobra"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "kvcobra_run.py"
+args = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "kvcobra_llama_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key llama --docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "kvcobra"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "kvcobra_run.py"
+args = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --rows data/ruler-fresh6-4096/test.jsonl --per-task 13 --offset {0,13}"
+out = "kvcobra_qwen3_ruler_{0,1}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --rows data/ruler-fresh6-4096/test.jsonl --per-task 1 --offset 0 --max-items 1"
+note = ""
+
+[[driver]]
+key = "kvcobra"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "kvcobra_run.py"
+args = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --docs data/stagec/quality.jsonl --part {0,1,2} --parts 3"
+out = "kvcobra_qwen3_quality_{0,1,2}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--tca-plan results/tca/plan_test.json --tca-setting tca2 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --model-key qwen3 --docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "kvcobra"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "kvcobra_run.py"
+args = "--check --rows data/ruler-fresh6-4096/smoke.jsonl --per-task 2"
+out = "kvcobra_llama_ruler_check.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--check --rows data/ruler-fresh6-4096/smoke.jsonl --per-task 1 --max-items 1"
+note = "KVCOBRA-CHECK.md: 1, 2 and 4 bits per dimension on the 26 smoke rows."
+
+[[driver]]
+key = "kvcobra"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "kvcobra_run.py"
+args = "--check --docs data/stagec/controls_smoke.jsonl"
+out = "kvcobra_llama_quality_check.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--check --docs data/stagec/controls_smoke.jsonl --max-items 1"
+note = "The 3 smoke articles; data/stagec/controls_smoke.jsonl = head -3 data/stagec/smoke.jsonl (README, Data)."
+
+[[driver]]
+key = "kvcobra"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "kvcobra_run.py"
+args = "--check --rows data/ruler-fresh6-4096/smoke.jsonl --per-task 2"
+out = "kvcobra_qwen3_ruler_check.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--check --rows data/ruler-fresh6-4096/smoke.jsonl --per-task 1 --max-items 1"
+note = ""
+
+[[driver]]
+key = "kvcobra"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "kvcobra_run.py"
+args = "--check --docs data/stagec/controls_smoke.jsonl"
+out = "kvcobra_qwen3_quality_check.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--check --docs data/stagec/controls_smoke.jsonl --max-items 1"
+note = "data/stagec/controls_smoke.jsonl = head -3 data/stagec/smoke.jsonl (README, Data)."
+
+# ---------------------------------------------------------------------------------------------------------------------
+# Token prior, COVERAGE-2, COVERAGE-3, iterative KVzip+
+
+[[driver]]
+key = "answer-blind"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "answer_blind_e1.py"
+args = "--docs data/answerblind/squad.jsonl data/answerblind/nq.jsonl --idf results/qaprior/idf_llama.json"
+out = "abl_e1_llama_run.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/answerblind/squad.jsonl --idf results/qaprior/idf_llama.json --max-docs 1"
+note = "E1: 69 SQuAD windows and 200 NQ pages. --max-docs counts per file, so one_example passes one file."
+
+[[driver]]
+key = "answer-blind"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "answer_blind_e1.py"
+args = "--docs data/answerblind/squad.jsonl data/answerblind/nq.jsonl --idf results/qaprior/idf_qwen3.json"
+out = "abl_e1_qwen3_run.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/answerblind/squad.jsonl --idf results/qaprior/idf_qwen3.json --max-docs 1"
+note = ""
+
+[[driver]]
+key = "answer-blind"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "answer_blind_e2_run.py"
+args = "--rows data/answerblind/e2_{ruler,docs}_test.jsonl --per-task 100"
+out = "abl_e2_llama_{ruler,docs}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/e2_ruler_test.jsonl --per-task 1 --max-items 1"
+note = "E2: one call on RULER fresh-19 rows, one on E1's documents."
+
+[[driver]]
+key = "answer-blind"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "answer_blind_e2_run.py"
+args = "--rows data/answerblind/e2_{ruler,docs}_test.jsonl --per-task 100"
+out = "abl_e2_qwen3_{ruler,docs}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/e2_ruler_test.jsonl --per-task 1 --max-items 1"
+note = ""
+
+[[driver]]
+key = "frontier"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "frontier_run.py"
+args = "--rows data/answerblind/fr_test.jsonl --per-task 200"
+out = "fr_llama_run.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/fr_test.jsonl --per-task 1 --max-items 1"
+note = "528 rows."
+
+[[driver]]
+key = "frontier"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "frontier_run.py"
+args = "--rows data/answerblind/fr_test.jsonl --per-task 200"
+out = "fr_qwen3_run.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/fr_test.jsonl --per-task 1 --max-items 1"
+note = ""
+
+[[driver]]
+key = "frontier-confirm"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "frontier_confirm_run.py"
+args = "--rows data/answerblind/fc_conf.jsonl --per-task 200"
+out = "fc_llama_conf.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/fc_conf.jsonl --per-task 1 --max-items 1"
+note = "RULER-format rows (fresh-21), 727 records."
+
+[[driver]]
+key = "frontier-confirm"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "frontier_confirm_run.py"
+args = "--docs data/stagec/quality.jsonl"
+out = "fc_llama_quality.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "frontier-confirm"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "frontier_confirm_run.py"
+args = "--longbench --plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task {gov_report,qmsum}"
+out = "fc_llama_{gov_report,qmsum}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--longbench --plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task gov_report --max-items 1"
+note = "--longbench switches to review_longbench.py's driver (rows Z and W50)."
+
+[[driver]]
+key = "frontier-confirm"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "frontier_confirm_run.py"
+args = "--rows data/answerblind/fc_conf.jsonl --per-task 200"
+out = "fc_qwen3_conf.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/fc_conf.jsonl --per-task 1 --max-items 1"
+note = "Ran in more than one call (resumed from --out; the last call added 20 of 727 records)."
+
+[[driver]]
+key = "frontier-confirm"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "frontier_confirm_run.py"
+args = "--docs data/stagec/quality.jsonl"
+out = "fc_qwen3_quality.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--docs data/stagec/quality.jsonl --max-items 1"
+note = ""
+
+[[driver]]
+key = "frontier-confirm"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "frontier_confirm_run.py"
+args = "--longbench --plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task {gov_report,qmsum}"
+out = "fc_qwen3_{gov_report,qmsum}.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--longbench --plan results/review/longbench_plan.json --data data/longbench/data --config data/longbench --task gov_report --max-items 1"
+note = "gov_report ran in more than one call (resumed from --out; the last call added 59 of 100)."
+
+[[driver]]
+key = "visible-lift"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "visible_lift_run.py"
+args = "--rows data/answerblind/vl_rows.jsonl"
+out = "vl_llama_run.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/vl_rows.jsonl --max-rows 1"
+note = "505 rows, no decoding."
+
+[[driver]]
+key = "visible-lift"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "visible_lift_run.py"
+args = "--rows data/answerblind/vl_rows.jsonl"
+out = "vl_qwen3_run.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--rows data/answerblind/vl_rows.jsonl --max-rows 1"
+note = ""
+
+[[driver]]
+key = "tca"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode check --plan results/tca/plan_check.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task 5 --offset 10"
+out = "tca_check_llama_ruler.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode check --plan results/tca/plan_check.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task 1 --offset 10 --max-items 1"
+note = "The held-out check behind results/tca/primary.json: split B, the last 5 calibration examples per task and the split-B train articles."
+
+[[driver]]
+key = "tca"
+model = "meta-llama/Llama-3.1-8B-Instruct@0e9e39f249a16976918f6564b8830bc894c89659"
+script = "tca_run.py"
+args = "--mode check --plan results/tca/plan_check.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_B.jsonl"
+out = "tca_check_llama_quality.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode check --plan results/tca/plan_check.json --model-key llama --tca-calib records/tca_calib_llama.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_llama.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_B.jsonl --max-items 1"
+note = "The held-out check behind results/tca/primary.json: split B, the last 5 calibration examples per task and the split-B train articles."
+
+[[driver]]
+key = "tca"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode check --plan results/tca/plan_check.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task 5 --offset 10"
+out = "tca_check_qwen3_ruler.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode check --plan results/tca/plan_check.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --rows data/ruler-fresh12-4096/calib.jsonl --per-task 1 --offset 10 --max-items 1"
+note = "The held-out check behind results/tca/primary.json: split B, the last 5 calibration examples per task and the split-B train articles."
+
+[[driver]]
+key = "tca"
+model = "Qwen/Qwen3-8B@b968826d9c46dd6066d109eabc6255188de91218"
+script = "tca_run.py"
+args = "--mode check --plan results/tca/plan_check.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_B.jsonl"
+out = "tca_check_qwen3_quality.jsonl"
+env = { PYTORCH_CUDA_ALLOC_CONF = "expandable_segments:True" }
+one_example = "--mode check --plan results/tca/plan_check.json --model-key qwen3 --tca-calib records/tca_calib_qwen3.json --tca-calib-rows data/ruler-fresh12-4096/calib.jsonl --calib records/rdkv_hidden_calib_qwen3.json --calib-rows data/ruler-fresh11-4096/calib.jsonl --docs data/tca/quality_train_B.jsonl --max-items 1"
+note = "The held-out check behind results/tca/primary.json: split B, the last 5 calibration examples per task and the split-B train articles."

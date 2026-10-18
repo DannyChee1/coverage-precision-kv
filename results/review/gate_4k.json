@@ -1,0 +1,91 @@
+{
+ "call": "PASS",
+ "label": "TurboQuant",
+ "key_variant": "mse",
+ "full_minus_tqk4v4": {
+  "delta": 0.0,
+  "p": 1.0,
+  "sided": 2,
+  "ci95": [
+   0.0,
+   0.0
+  ]
+ },
+ "accuracy": {
+  "full": 97.04142011834318,
+  "TQ.k4v4": 97.04142011834318,
+  "TQ.k3v3": 96.44970414201183,
+  "TQ.k3v3ip": 87.59368836291914
+ },
+ "per_task": {
+  "full": {
+   "cwe": 100.0,
+   "fwe": 100.0,
+   "niah_multikey_1": 100.0,
+   "niah_multikey_2": 100.0,
+   "niah_multikey_3": 100.0,
+   "niah_multiquery": 100.0,
+   "niah_multivalue": 100.0,
+   "niah_single_1": 100.0,
+   "niah_single_2": 100.0,
+   "niah_single_3": 100.0,
+   "qa_1": 100.0,
+   "qa_2": 61.53846153846154,
+   "vt": 100.0
+  },
+  "TQ.k4v4": {
+   "cwe": 100.0,
+   "fwe": 100.0,
+   "niah_multikey_1": 100.0,
+   "niah_multikey_2": 100.0,
+   "niah_multikey_3": 100.0,
+   "niah_multiquery": 100.0,
+   "niah_multivalue": 100.0,
+   "niah_single_1": 100.0,
+   "niah_single_2": 100.0,
+   "niah_single_3": 100.0,
+   "qa_1": 100.0,
+   "qa_2": 61.53846153846154,
+   "vt": 100.0
+  },
+  "TQ.k3v3": {
+   "cwe": 100.0,
+   "fwe": 100.0,
+   "niah_multikey_1": 100.0,
+   "niah_multikey_2": 100.0,
+   "niah_multikey_3": 100.0,
+   "niah_multiquery": 100.0,
+   "niah_multivalue": 100.0,
+   "niah_single_1": 100.0,
+   "niah_single_2": 100.0,
+   "niah_single_3": 100.0,
+   "qa_1": 100.0,
+   "qa_2": 53.84615384615385,
+   "vt": 100.0
+  },
+  "TQ.k3v3ip": {
+   "cwe": 98.46153846153847,
+   "fwe": 94.87179487179486,
+   "niah_multikey_1": 100.0,
+   "niah_multikey_2": 76.92307692307692,
+   "niah_multikey_3": 46.15384615384615,
+   "niah_multiquery": 98.07692307692308,
+   "niah_multivalue": 98.07692307692308,
+   "niah_single_1": 100.0,
+   "niah_single_2": 92.3076923076923,
+   "niah_single_3": 92.3076923076923,
+   "qa_1": 84.61538461538461,
+   "qa_2": 61.53846153846154,
+   "vt": 95.38461538461539
+  }
+ },
+ "examples": 169,
+ "rule": {
+  "margin": 1.0,
+  "examples": 169,
+  "bootstrap": {
+   "B": 10000,
+   "seed": 0
+  }
+ }
+}

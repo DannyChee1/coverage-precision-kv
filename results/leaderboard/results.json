@@ -1,0 +1,30 @@
+{
+ "call": "REPRODUCED",
+ "arms": {
+  "full": {
+   "ours": 96.46410256410256,
+   "leaderboard_same_examples": 96.24358974358974,
+   "difference": 0.22051282051282328,
+   "agreement": 0.9953846153846154
+  },
+  "kvzip_plus@0.9375": {
+   "ours": 74.16666666666666,
+   "leaderboard_same_examples": 74.20769230769231,
+   "difference": -0.04102564102565509,
+   "agreement": 0.9276923076923077,
+   "evicted_share": 0.9375,
+   "reproduces": true
+  },
+  "kvzip_plus@0.96875": {
+   "ours": 33.76410256410256,
+   "leaderboard_same_examples": 33.14102564102564,
+   "difference": 0.6230769230769155,
+   "agreement": 0.92,
+   "evicted_share": 0.96875,
+   "reproduces": true
+  }
+ },
+ "examples": 650,
+ "tolerance_pts": 2.0,
+ "agreement_floor": 0.9
+}

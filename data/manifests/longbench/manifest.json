@@ -1,0 +1,32 @@
+{
+ "source": "THUDM/LongBench v1 data.zip (Hugging Face dataset THUDM/LongBench), unpacked as data/longbench/data/<task>.jsonl",
+ "revision": "5e628be450b7e67fb7ae6e201bd6d8f7056f7672",
+ "data_zip_sha256": "cb45b11a4133c6bc1d6a44b0f8e701335ff1e543195db1103472e575857f7f64",
+ "config": {
+  "dataset2prompt.json": "56d22ad4f382169c2b8a11ff4c982a4a1bea096c8152b0f0b85b64686b157c30",
+  "dataset2maxlen.json": "72966b3c0933e214591637fb085798c5e687ebff4ddaab5d99bbc31120532022"
+ },
+ "config_source": "LongBench's config/ folder, copied to data/longbench/",
+ "task_sha256": {
+  "gov_report": "d28112beb3a9b41d80aa390837fa1a31c9e3da84a5262009c97585cc49f597c4",
+  "qmsum": "e992f5157679b0c1ca281d0da19d1a8b3496117630ae639c9683ed3dab029113"
+ },
+ "tasks_used": {
+  "review longbench, frontier-confirm (hashes checked)": [
+   "gov_report",
+   "qmsum"
+  ],
+  "rdkv fidelity gate (no hashes recorded)": [
+   "qasper",
+   "multifieldqa_en",
+   "trec",
+   "lcc"
+  ],
+  "rdkv fidelity calibration (shipped as records/rdkv_calib_llama.json)": [
+   "narrativeqa",
+   "hotpotqa",
+   "gov_report",
+   "qmsum"
+  ]
+ }
+}

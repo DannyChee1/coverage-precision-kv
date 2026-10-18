@@ -1,0 +1,18 @@
+{
+ "source": "huggingface.co/spaces/nvidia/kvpress-leaderboard, per-run predictions.csv (downloaded 2026-10-02)",
+ "place_in": "external/kvpress-leaderboard/<run>/predictions.csv",
+ "runs": {
+  "full": {
+   "run": "ruler__4096__meta-llama--Llama-3.1-8B-Instruct__no_press__0.00",
+   "predictions_sha256": "280de6e87bdd846f73d7eb35035193145390c334ff24b34ae93b83fd920b1909"
+  },
+  "kvzip_plus@0.9375": {
+   "run": "ruler__4096__meta-llama--Meta-Llama-3.1-8B-Instruct__kvzip_plus__0.94",
+   "predictions_sha256": "34300bf3f18230a79dd08b2c9b24e0a0f5dec90f892e051b0e29ee96f957b193"
+  },
+  "kvzip_plus@0.96875": {
+   "run": "ruler__4096__meta-llama--Meta-Llama-3.1-8B-Instruct__kvzip_plus__0.97",
+   "predictions_sha256": "ac3ef2ce29f272d403c1370830726837cf1e262c0144ad306c250ca4c5d68082"
+  }
+ }
+}

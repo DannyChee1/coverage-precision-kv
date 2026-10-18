@@ -1,0 +1,161 @@
+{
+ "call": "FAIL",
+ "label": "RDKV-inspired allocator",
+ "criteria": {
+  "(i) |RDKV64 - FullKV - paper| <= 3.0": false,
+  "(ii) RDKV64 - SnapKV64 >= paper advantage / 2": true
+ },
+ "complete": {
+  "qasper": true,
+  "multifieldqa_en": true,
+  "trec": true,
+  "lcc": true
+ },
+ "ours": {
+  "subset": {
+   "full": 59.35164988803149,
+   "rdkv128": 52.42288040783302,
+   "rdkv64": 49.09699302140689,
+   "snap128": 41.120887547602734,
+   "snap64": 35.468469092760294
+  },
+  "per_task": {
+   "full": {
+    "qasper": 44.791987672935214,
+    "multifieldqa_en": 55.422611879190754,
+    "trec": 72.5,
+    "lcc": 64.692
+   },
+   "rdkv128": {
+    "qasper": 37.55577970787445,
+    "multifieldqa_en": 54.35574192345762,
+    "trec": 53.0,
+    "lcc": 64.77999999999999
+   },
+   "rdkv64": {
+    "qasper": 33.500561978855146,
+    "multifieldqa_en": 52.05141010677238,
+    "trec": 46.0,
+    "lcc": 64.836
+   },
+   "snap128": {
+    "qasper": 24.370257507495356,
+    "multifieldqa_en": 48.44729268291556,
+    "trec": 30.5,
+    "lcc": 61.16600000000001
+   },
+   "snap64": {
+    "qasper": 22.915286176163885,
+    "multifieldqa_en": 39.546590194877304,
+    "trec": 21.0,
+    "lcc": 58.412
+   }
+  }
+ },
+ "paper": {
+  "subset": {
+   "full": 59.629999999999995,
+   "snap64": 38.535000000000004,
+   "rdkv64": 52.457499999999996,
+   "snap128": 44.81,
+   "rdkv128": 56.1425
+  },
+  "per_task": {
+   "full": {
+    "qasper": 44.82,
+    "multifieldqa_en": 55.46,
+    "trec": 73.0,
+    "lcc": 65.24
+   },
+   "snap64": {
+    "qasper": 21.05,
+    "multifieldqa_en": 39.35,
+    "trec": 39.0,
+    "lcc": 54.74
+   },
+   "rdkv64": {
+    "qasper": 34.47,
+    "multifieldqa_en": 54.16,
+    "trec": 59.5,
+    "lcc": 61.7
+   },
+   "snap128": {
+    "qasper": 24.19,
+    "multifieldqa_en": 48.91,
+    "trec": 47.0,
+    "lcc": 59.14
+   },
+   "rdkv128": {
+    "qasper": 41.34,
+    "multifieldqa_en": 55.55,
+    "trec": 65.0,
+    "lcc": 62.68
+   }
+  }
+ },
+ "contrasts": {
+  "rdkv64 - full": [
+   -10.2546568666246,
+   -7.172499999999999
+  ],
+  "rdkv64 - snap64": [
+   13.628523928646594,
+   13.922499999999992
+  ],
+  "rdkv128 - full": [
+   -6.9287694801984685,
+   -3.487499999999997
+  ],
+  "rdkv128 - snap128": [
+   11.301992860230285,
+   11.332499999999996
+  ]
+ },
+ "pipeline_checks": {
+  "full - paper": -0.278350111968507,
+  "snap64 - paper": -3.0665309072397093
+ },
+ "eps_layer_mean": {
+  "k": [
+   0.1814362185250502,
+   0.007118928642739775,
+   2.4631690983767385e-05
+  ],
+  "v": [
+   0.338147479633335,
+   0.013492432932252996,
+   4.670619426860867e-05
+  ],
+  "paper": {
+   "k": [
+    0.149,
+    0.0062,
+    2.2e-05
+   ],
+   "v": [
+    0.313,
+    0.014,
+    4.9e-05
+   ]
+  }
+ },
+ "accounting": {
+  "rdkv128": {
+   "bits_over_budget": 0.9984490125661805,
+   "kept_entries_mean": 157642.9342857143
+  },
+  "rdkv64": {
+   "bits_over_budget": 0.9981803894610632,
+   "kept_entries_mean": 77802.54666666666
+  },
+  "snap128": {
+   "bits_over_budget": 1.0,
+   "kept_entries_mean": 32768.0
+  },
+  "snap64": {
+   "bits_over_budget": 1.0,
+   "kept_entries_mean": 16384.0
+  }
+ },
+ "tolerance": 3.0
+}

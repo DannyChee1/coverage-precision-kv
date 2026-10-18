@@ -1,0 +1,35 @@
+{
+ "quality": {
+  "commit": "f84977c40dbfef70c9cab48037b7becfc8e45f73",
+  "file": "data/v1.0.1/QuALITY.v1.0.1.htmlstripped.dev",
+  "documents": 115,
+  "questions": 2086,
+  "difficult": 1065,
+  "jsonl_sha256": "77ae8758881bc114286d4595dbcf3ab92104eed1028bd4412e6f71f94d63a6ed"
+ },
+ "longhealth": {
+  "commit": "479922279ce8fa528fe2cd87d854c6a2f8365d21",
+  "file": "data/benchmark_v5.json",
+  "documents": 20,
+  "questions": 400,
+  "several_gold": [
+   "patient_16-11",
+   "patient_20-11"
+  ],
+  "jsonl_sha256": "30eb24b7fa3cc12b14cdfc1e85cfcc1a5c66a99524be087c3c4d8f62e9fed9a0"
+ },
+ "source_sha256": {
+  "QuALITY.v1.0.1.htmlstripped.dev": "99852d874994078e4b4112b71ceca4dd35aa3a24ff6d3a35c051be25295b4fef",
+  "benchmark_v5.json": "82d34d9da47ab279d7aa89a6bdf298c0ac79f1e506e1dd0a3ea69a1ad5e2cb45"
+ },
+ "smoke": {
+  "documents": [
+   "quality-20073",
+   "quality-55815",
+   "quality-22876",
+   "longhealth-patient_02"
+  ],
+  "questions": 75,
+  "jsonl_sha256": "0ab21e4585dabfe41e68c393f54ae72fb4f58e54abf25372ddcadccafb8237b2"
+ }
+}

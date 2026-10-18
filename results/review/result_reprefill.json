@@ -1,0 +1,815 @@
+{
+ "rows": [
+  {
+   "model": "llama",
+   "tokens": 4096,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 16384,
+    "full": 536870912,
+    "recipe": 8388608.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.34760882399999815,
+    "load_full": {
+     "pcie_host": 0.02147483648,
+     "nvme": 0.08947848533333333,
+     "10gbe": 0.4294967296,
+     "100gbe": 0.04294967296,
+     "pcie_host_measured": 0.021421013750000384
+    },
+    "load_recipe": {
+     "pcie_host": 0.017831164820000085,
+     "nvme": 0.01889372183333342,
+     "10gbe": 0.024206506900000088,
+     "100gbe": 0.018166709140000088,
+     "pcie_host_measured": 0.017830323839843842
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 1.8926765239999988,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.8880694421036954,
+    "full": 56.83644429463651
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 80.8826429980276
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 62.27229146692234
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 4096,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 16384,
+    "full": 536870912,
+    "recipe": 16777216.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.34760882399999815,
+    "load_full": {
+     "pcie_host": 0.02147483648,
+     "nvme": 0.08947848533333333,
+     "10gbe": 0.4294967296,
+     "100gbe": 0.04294967296,
+     "pcie_host_measured": 0.021421013750000384
+    },
+    "load_recipe": {
+     "pcie_host": 0.018358144140005046,
+     "nvme": 0.020483258166671712,
+     "10gbe": 0.031108828300005047,
+     "100gbe": 0.019029232780005043,
+     "pcie_host_measured": 0.018356462179692556
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 1.8926765239999988,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.7761388842073909,
+    "full": 56.83644429463651
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 93.11637080867852
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 68.5522531160115
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 8192,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 32768,
+    "full": 1073741824,
+    "recipe": 16777216.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.800029066999997,
+    "load_full": {
+     "pcie_host": 0.04294967296,
+     "nvme": 0.17895697066666666,
+     "10gbe": 0.8589934592,
+     "100gbe": 0.08589934592,
+     "pcie_host_measured": 0.04284202750000077
+    },
+    "load_recipe": {
+     "pcie_host": 0.03566232964000017,
+     "nvme": 0.03778744366666684,
+     "10gbe": 0.048413013800000175,
+     "100gbe": 0.036333418280000175,
+     "pcie_host_measured": 0.035660647679687685
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 3.845718153,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.7717238963768829,
+    "full": 49.390329368120504
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 80.8826429980276
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 62.27229146692234
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 8192,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 32768,
+    "full": 1073741824,
+    "recipe": 33554432.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.800029066999997,
+    "load_full": {
+     "pcie_host": 0.04294967296,
+     "nvme": 0.17895697066666666,
+     "10gbe": 0.8589934592,
+     "100gbe": 0.08589934592,
+     "pcie_host_measured": 0.04284202750000077
+    },
+    "load_recipe": {
+     "pcie_host": 0.03671628828001009,
+     "nvme": 0.040966516333343424,
+     "10gbe": 0.06221765660001009,
+     "100gbe": 0.03805846556001009,
+     "pcie_host_measured": 0.03671292435938511
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 3.845718153,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.5434477927537658,
+    "full": 49.390329368120504
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 93.11637080867852
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 68.5522531160115
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 16384,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 65536,
+    "full": 2147483648,
+    "recipe": 33554432.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 1.887938603000002,
+    "load_full": {
+     "pcie_host": 0.08589934592,
+     "nvme": 0.3579139413333333,
+     "10gbe": 1.7179869184,
+     "100gbe": 0.17179869184,
+     "pcie_host_measured": 0.08568405500000154
+    },
+    "load_recipe": {
+     "pcie_host": 0.07132465928000034,
+     "nvme": 0.07557488733333367,
+     "10gbe": 0.09682602760000035,
+     "100gbe": 0.07266683656000035,
+     "pcie_host_measured": 0.07132129535937537
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 8.214673699000002,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.6540483337953118,
+    "full": 41.859093362899955
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 80.8826429980276
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 62.27229146692234
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 16384,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 65536,
+    "full": 2147483648,
+    "recipe": 67108864.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 1.887938603000002,
+    "load_full": {
+     "pcie_host": 0.08589934592,
+     "nvme": 0.3579139413333333,
+     "10gbe": 1.7179869184,
+     "100gbe": 0.17179869184,
+     "pcie_host_measured": 0.08568405500000154
+    },
+    "load_recipe": {
+     "pcie_host": 0.07343257656002018,
+     "nvme": 0.08193303266668685,
+     "10gbe": 0.12443531320002019,
+     "100gbe": 0.07611693112002017,
+     "pcie_host_measured": 0.07342584871877023
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 8.214673699000002,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.3080966675906236,
+    "full": 41.859093362899955
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 93.11637080867852
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 68.5522531160115
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 32768,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 131072,
+    "full": 4294967296,
+    "recipe": 67108864.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 4.480689032000001,
+    "load_full": {
+     "pcie_host": 0.17179869184,
+     "nvme": 0.7158278826666666,
+     "10gbe": 3.4359738368,
+     "100gbe": 0.34359738368,
+     "pcie_host_measured": 0.17136811000000307
+    },
+    "load_recipe": {
+     "pcie_host": 0.14264931856000068,
+     "nvme": 0.15114977466666735,
+     "10gbe": 0.1936520552000007,
+     "100gbe": 0.1453336731200007,
+     "pcie_host_measured": 0.14264259071875074
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 18.759144136000003,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.5511666124479222,
+    "full": 35.27466319666702
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 80.8826429980276
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 62.27229146692234
+    }
+   }
+  },
+  {
+   "model": "llama",
+   "tokens": 32768,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 131072,
+    "full": 4294967296,
+    "recipe": 134217728.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 4.480689032000001,
+    "load_full": {
+     "pcie_host": 0.17179869184,
+     "nvme": 0.7158278826666666,
+     "10gbe": 3.4359738368,
+     "100gbe": 0.34359738368,
+     "pcie_host_measured": 0.17136811000000307
+    },
+    "load_recipe": {
+     "pcie_host": 0.14686515312004036,
+     "nvme": 0.1638660653333737,
+     "10gbe": 0.24887062640004037,
+     "100gbe": 0.15223386224004035,
+     "pcie_host_measured": 0.14685169743754045
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 18.759144136000003,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.1023332248958444,
+    "full": 35.27466319666702
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.36489151873768,
+     "recipe": 93.11637080867852
+    },
+    "quality": {
+     "full": 71.3326941514861,
+     "recipe": 68.5522531160115
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 4096,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 16384,
+    "full": 603979776,
+    "recipe": 9437184.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.3760048590000018,
+    "load_full": {
+     "pcie_host": 0.02415919104,
+     "nvme": 0.100663296,
+     "10gbe": 0.4831838208,
+     "100gbe": 0.04831838208,
+     "pcie_host_measured": 0.02406598874999588
+    },
+    "load_recipe": {
+     "pcie_host": 0.02093841286000699,
+     "nvme": 0.022133789500006988,
+     "10gbe": 0.028110672700006986,
+     "100gbe": 0.021315900220006987,
+     "pcie_host_measured": 0.020936956574225674
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 2.271963522,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.9236273491880549,
+    "full": 59.11215034803551
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 71.16370808678502
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 61.84084372003835
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 4096,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 16384,
+    "full": 603979776,
+    "recipe": 18874368.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.3760048590000018,
+    "load_full": {
+     "pcie_host": 0.02415919104,
+     "nvme": 0.100663296,
+     "10gbe": 0.4831838208,
+     "100gbe": 0.04831838208,
+     "pcie_host_measured": 0.02406598874999588
+    },
+    "load_recipe": {
+     "pcie_host": 0.02147178497000771,
+     "nvme": 0.02386253825000771,
+     "10gbe": 0.03581630465000771,
+     "100gbe": 0.02222675969000771,
+     "pcie_host_measured": 0.021468872398445082
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 2.271963522,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.8472546983761098,
+    "full": 59.11215034803551
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 91.64201183431952
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 71.62032598274209
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 8192,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 32768,
+    "full": 1207959552,
+    "recipe": 18874368.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.9031107019999993,
+    "load_full": {
+     "pcie_host": 0.04831838208,
+     "nvme": 0.201326592,
+     "10gbe": 0.9663676416,
+     "100gbe": 0.09663676416,
+     "pcie_host_measured": 0.04813197749999176
+    },
+    "load_recipe": {
+     "pcie_host": 0.04187682572001398,
+     "nvme": 0.044267579000013976,
+     "10gbe": 0.05622134540001397,
+     "100gbe": 0.042631800440013974,
+     "pcie_host_measured": 0.04187391314845135
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 4.469895158,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.7690936901332396,
+    "full": 49.22199616852733
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 71.16370808678502
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 61.84084372003835
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 8192,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 32768,
+    "full": 1207959552,
+    "recipe": 37748736.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 0.9031107019999993,
+    "load_full": {
+     "pcie_host": 0.04831838208,
+     "nvme": 0.201326592,
+     "10gbe": 0.9663676416,
+     "100gbe": 0.09663676416,
+     "pcie_host_measured": 0.04813197749999176
+    },
+    "load_recipe": {
+     "pcie_host": 0.04294356994001542,
+     "nvme": 0.04772507650001542,
+     "10gbe": 0.07163260930001542,
+     "100gbe": 0.04445351938001542,
+     "pcie_host_measured": 0.042937744796890165
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 4.469895158,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.5381873802664792,
+    "full": 49.22199616852733
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 91.64201183431952
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 71.62032598274209
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 16384,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 65536,
+    "full": 2415919104,
+    "recipe": 37748736.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 2.055110775000003,
+    "load_full": {
+     "pcie_host": 0.09663676416,
+     "nvme": 0.402653184,
+     "10gbe": 1.9327352832,
+     "100gbe": 0.19327352832,
+     "pcie_host_measured": 0.09626395499998353
+    },
+    "load_recipe": {
+     "pcie_host": 0.08375365144002796,
+     "nvme": 0.08853515800002795,
+     "10gbe": 0.11244269080002794,
+     "100gbe": 0.08526360088002795,
+     "pcie_host_measured": 0.0837478262969027
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 9.414766649,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.6759506600319382,
+    "full": 43.26084224204404
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 71.16370808678502
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 61.84084372003835
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 16384,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 65536,
+    "full": 2415919104,
+    "recipe": 75497472.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 2.055110775000003,
+    "load_full": {
+     "pcie_host": 0.09663676416,
+     "nvme": 0.402653184,
+     "10gbe": 1.9327352832,
+     "100gbe": 0.19327352832,
+     "pcie_host_measured": 0.09626395499998353
+    },
+    "load_recipe": {
+     "pcie_host": 0.08588713988003084,
+     "nvme": 0.09545015300003085,
+     "10gbe": 0.14326521860003083,
+     "100gbe": 0.08890703876003084,
+     "pcie_host_measured": 0.08587548959378033
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 9.414766649,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.3519013200638763,
+    "full": 43.26084224204404
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 91.64201183431952
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 71.62032598274209
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 32768,
+   "budget": "1.5625",
+   "bytes": {
+    "token_ids": 131072,
+    "full": 4831838208,
+    "recipe": 75497472.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 5.068342610999991,
+    "load_full": {
+     "pcie_host": 0.19327352832,
+     "nvme": 0.805306368,
+     "10gbe": 3.8654705664,
+     "100gbe": 0.38654705664,
+     "pcie_host_measured": 0.19252790999996705
+    },
+    "load_recipe": {
+     "pcie_host": 0.1675073028800559,
+     "nvme": 0.1770703160000559,
+     "10gbe": 0.2248853816000559,
+     "100gbe": 0.1705272017600559,
+     "pcie_host_measured": 0.1674956525938054
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 21.404444150000018,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 0.5481687373639952,
+    "full": 35.08279919129569
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 71.16370808678502
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 61.84084372003835
+    }
+   }
+  },
+  {
+   "model": "qwen3",
+   "tokens": 32768,
+   "budget": "3.125",
+   "bytes": {
+    "token_ids": 131072,
+    "full": 4831838208,
+    "recipe": 150994944.0
+   },
+   "ttft_seconds": {
+    "re_prefill": 5.068342610999991,
+    "load_full": {
+     "pcie_host": 0.19327352832,
+     "nvme": 0.805306368,
+     "10gbe": 3.8654705664,
+     "100gbe": 0.38654705664,
+     "pcie_host_measured": 0.19252790999996705
+    },
+    "load_recipe": {
+     "pcie_host": 0.17177427976006168,
+     "nvme": 0.1909003060000617,
+     "10gbe": 0.28653043720006166,
+     "100gbe": 0.17781407752006168,
+     "pcie_host_measured": 0.17175097918756066
+    }
+   },
+   "dequant_included": true,
+   "compress_seconds": 21.404444150000018,
+   "sources": {
+    "prefill": "measured",
+    "score": "measured"
+   },
+   "break_even_reuses_per_month": {
+    "recipe": 1.0963374747279904,
+    "full": 35.08279919129569
+   },
+   "accuracy": {
+    "ruler": {
+     "full": 95.79881656804733,
+     "recipe": 91.64201183431952
+    },
+    "quality": {
+     "full": 77.03739213806328,
+     "recipe": 71.62032598274209
+    }
+   }
+  }
+ ],
+ "recipe_faster_from_tokens": {
+  "llama @1.5625 pcie_host": 4096,
+  "llama @1.5625 nvme": 4096,
+  "llama @1.5625 10gbe": 4096,
+  "llama @1.5625 100gbe": 4096,
+  "llama @1.5625 pcie_host_measured": 4096,
+  "llama @3.125 pcie_host": 4096,
+  "llama @3.125 nvme": 4096,
+  "llama @3.125 10gbe": 4096,
+  "llama @3.125 100gbe": 4096,
+  "llama @3.125 pcie_host_measured": 4096,
+  "qwen3 @1.5625 pcie_host": 4096,
+  "qwen3 @1.5625 nvme": 4096,
+  "qwen3 @1.5625 10gbe": 4096,
+  "qwen3 @1.5625 100gbe": 4096,
+  "qwen3 @1.5625 pcie_host_measured": 4096,
+  "qwen3 @3.125 pcie_host": 4096,
+  "qwen3 @3.125 nvme": 4096,
+  "qwen3 @3.125 10gbe": 4096,
+  "qwen3 @3.125 100gbe": 4096,
+  "qwen3 @3.125 pcie_host_measured": 4096
+ },
+ "fits": {
+  "llama": {
+   "prefill": [
+    0.08324421841997455,
+    0.0020376377529619854
+   ],
+   "score": [
+    0.48324395930466013,
+    -0.002399644834648171
+   ]
+  },
+  "qwen3": {
+   "prefill": [
+    0.08178590870949816,
+    0.003051330698432599
+   ],
+   "score": [
+    0.5653228022610671,
+    -0.008130618693242804
+   ]
+  }
+ },
+ "constants": {
+  "kv_bytes_per_token": {
+   "llama": 131072,
+   "qwen3": 147456
+  },
+  "bandwidth_gbps": {
+   "pcie_host": 25.0,
+   "nvme": 6.0,
+   "10gbe": 1.25,
+   "100gbe": 12.5
+  },
+  "gpu_usd_per_hour": 2.25,
+  "storage_usd_per_gb_month": 0.023,
+  "token_id_bytes": 4
+ }
+}

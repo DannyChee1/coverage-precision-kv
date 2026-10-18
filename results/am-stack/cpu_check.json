@@ -1,0 +1,73 @@
+{
+ "what": "am_stack.py on CPU (fp32, sdpa, max 8 new tokens), tiny random-init models with real configs and tokenizers (2 layers, hidden 256, 4 query / 2 KV heads, head_dim 128)",
+ "rows": "data/ruler-fresh5-4096/smoke.jsonl",
+ "models": {
+  "tiny_llama": {
+   "examples": 26,
+   "over_budget": [],
+   "answers_present": true,
+   "full_row_equals_ablation": "26/26",
+   "kvzip_k3pc_equals_ablation_k3_pc": "26/26",
+   "kvzip_k3pc_same_kept": true,
+   "kvzip_k3pc_same_key_error": true,
+   "kept_vs_am16": {
+    "am_stack4": 3.470335284538549,
+    "am_k3v2": 5.171378754877035,
+    "kvzip_k3pc": 4.896478326625605
+   },
+   "share_of_full_bytes": {
+    "am16": 0.015553578450533815,
+    "am_stack4": 0.015498223726215165,
+    "am_k3v2": 0.01547143680443429,
+    "kvzip_k3pc": 0.015461784426486432
+   },
+   "am_output_error": {
+    "am16": 0.035375287079100065,
+    "am_stack4": 0.15742597264201882,
+    "am_k3v2": 0.6417519905102941
+   },
+   "key_error": {
+    "am16": 0.0,
+    "am_stack4": 0.06812891285293378,
+    "am_k3v2": 0.14760541872909436,
+    "kvzip_k3pc": 0.15699376767644516
+   },
+   "answers_differ_between_rows": 22,
+   "seconds_per_example": 10.102879395851723
+  },
+  "tiny_qwen3": {
+   "examples": 26,
+   "over_budget": [],
+   "answers_present": true,
+   "full_row_equals_ablation": "26/26",
+   "kvzip_k3pc_equals_ablation_k3_pc": "26/26",
+   "kvzip_k3pc_same_kept": true,
+   "kvzip_k3pc_same_key_error": true,
+   "kept_vs_am16": {
+    "am_stack4": 3.4724754768534103,
+    "am_k3v2": 5.176205717847011,
+    "kvzip_k3pc": 4.922830571144458
+   },
+   "share_of_full_bytes": {
+    "am16": 0.015559824120630363,
+    "am_stack4": 0.01547333517323544,
+    "am_k3v2": 0.015486273538353044,
+    "kvzip_k3pc": 0.015478949465077744
+   },
+   "am_output_error": {
+    "am16": 0.31749125158127683,
+    "am_stack4": 0.2509412040683226,
+    "am_k3v2": 0.28739286808726877
+   },
+   "key_error": {
+    "am16": 0.0,
+    "am_stack4": 0.07280369525632033,
+    "am_k3v2": 0.1579202383470077,
+    "kvzip_k3pc": 0.16490458482160017
+   },
+   "answers_differ_between_rows": 26,
+   "seconds_per_example": 10.53532507786384
+  }
+ },
+ "am16_equals_am_compute_compacted_cache": true
+}

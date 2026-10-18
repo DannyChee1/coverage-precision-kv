@@ -1,0 +1,86 @@
+{
+ "stage": "ablate",
+ "flip": {
+  "llama": [
+   -4.175739388059008,
+   -3.6708884510054247
+  ],
+  "qwen3": [
+   -3.2284440922824067,
+   -2.785766016116768
+  ]
+ },
+ "flip_source": "routing/fit.json M1, per-channel keys, top-1",
+ "probe": {
+  "kappa": [
+   0.1,
+   0.3,
+   1.0,
+   3.0,
+   10.0,
+   30.0,
+   100.0,
+   300.0,
+   1000.0
+  ],
+  "rho": [
+   0.1,
+   0.3,
+   1.0,
+   3.0,
+   10.0,
+   30.0,
+   100.0,
+   300.0,
+   1000.0
+  ],
+  "target_share": 0.6
+ },
+ "note": "TCA2-ABLATION.md: tca2 and one switch toward rdkvpc per row (A key weight, B budget level, C split, D 3-bit keys, E value weighting)",
+ "kappa0": 100.0,
+ "rho_hi": 30.0,
+ "rho_hi_reached_shift": true,
+ "settings": {
+  "tca2": {
+   "alpha": 6.0,
+   "nu": 1.0,
+   "kappa": 100.0,
+   "rho": 0.0
+  },
+  "tca2a": {
+   "alpha": 6.0,
+   "nu": 1.0,
+   "kappa": 100.0,
+   "rho": 0.0,
+   "key_weight": "linear"
+  },
+  "tca2b": {
+   "alpha": 6.0,
+   "nu": 1.0,
+   "kappa": 100.0,
+   "rho": 0.0,
+   "budget": "head"
+  },
+  "tca2c": {
+   "alpha": 6.0,
+   "nu": 1.0,
+   "kappa": 100.0,
+   "rho": 0.0,
+   "split": "fixed"
+  },
+  "tca2d": {
+   "alpha": 6.0,
+   "nu": 1.0,
+   "kappa": 100.0,
+   "rho": 0.0,
+   "key_bits": "rdkv"
+  },
+  "tca2e": {
+   "alpha": 1.0,
+   "nu": 1.0,
+   "kappa": 100.0,
+   "rho": 0.0,
+   "value_weight": "pooled"
+  }
+ }
+}
